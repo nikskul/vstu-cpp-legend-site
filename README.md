@@ -25,15 +25,7 @@ python3 -m http.server 8100 --directory dist
 
 При пуше в `master` workflow `.github/workflows/pages.yml` сам собирает сайт и публикует его через GitHub Actions.
 
-### Первая публикация
-
-GitHub Pages нужно один раз включить вручную — workflow не может сделать это от имени `GITHUB_TOKEN`:
-
-1. Открыть **Settings → Pages** репозитория.
-2. В блоке **Build and deployment** выбрать **Source: GitHub Actions**.
-3. Открыть **Actions → Deploy GitHub Pages** и нажать **Re-run all jobs** (или сделать новый пуш в `master`).
-
-После этого сайт будет доступен по адресу <https://nikskul.github.io/vstu-cpp-legend-site/>.
+Сайт: <https://nikskul.github.io/vstu-cpp-legend-site/>.
 
 ## Ветки
 

@@ -384,6 +384,10 @@
 		if (submenuToggle) {
 			submenuToggle.setAttribute('aria-expanded', 'false');
 		}
+		// Если фокус был внутри скрытого списка, вернуть его на кнопку.
+		if (submenu && submenuToggle && submenu.contains(document.activeElement)) {
+			submenuToggle.focus();
+		}
 	}
 
 	function initNavigation() {

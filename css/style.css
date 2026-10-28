@@ -289,8 +289,19 @@ strong {
 	list-style: none;
 }
 
+/* Невидимый мостик через зазор, иначе :hover сбрасывается по пути к пунктам. */
+@media (min-width: 961px) {
+	.submenu::before {
+		content: "";
+		position: absolute;
+		top: -9px;
+		left: 0;
+		right: 0;
+		height: 9px;
+	}
+}
+
 .has-submenu:hover .submenu,
-.has-submenu:focus-within .submenu,
 .has-submenu.is-open .submenu {
 	display: block;
 }
@@ -1846,8 +1857,7 @@ body.is-home .player:not(.is-collapsed) {
 		display: none;
 	}
 
-	.has-submenu.is-open .submenu,
-	.has-submenu:focus-within .submenu {
+	.has-submenu.is-open .submenu {
 		display: block;
 	}
 
