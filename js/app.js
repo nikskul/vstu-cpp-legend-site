@@ -518,13 +518,14 @@
 	/* ---------------- Переходы без перезагрузки ---------------- */
 
 	function normalizePath(pathname) {
-		if (!pathname || pathname === '/') {
-			return '/index.php';
+		var path = pathname || '/';
+
+		if (/\.(?:php|html)$/i.test(path)) {
+			return path.replace(/\.(?:php|html)$/i, '');
 		}
-		if (pathname.charAt(pathname.length - 1) === '/') {
-			return pathname + 'index.php';
-		}
-		return pathname;
+
+		path = path.replace(/\/+$/, '');
+		return (path || '') + '/index';
 	}
 
 	function updateActiveNav() {
@@ -544,7 +545,7 @@
 		});
 
 		if (submenu) {
-			submenu.classList.toggle('is-active', /\/lb\d+\.php$/.test(current));
+			submenu.classList.toggle('is-active', /\/lb\d+$/i.test(current));
 		}
 	}
 
@@ -566,7 +567,7 @@
 		if (url.origin !== window.location.origin) {
 			return false;
 		}
-		return /\.php$/.test(url.pathname) || url.pathname === '/' || /\/$/.test(url.pathname);
+		return /\.(?:php|html)$/i.test(url.pathname) || url.pathname === '/' || /\/$/.test(url.pathname);
 	}
 
 	function shouldHandleLink(event, link) {
@@ -718,7 +719,7 @@
 				return;
 			}
 
-			if (url.pathname === window.location.pathname && url.search === window.location.search) {
+			if (normalizePath(url.pathname) === normalizePath(window.location.pathname) && url.search === window.location.search) {
 				event.preventDefault();
 				if (url.hash) {
 					scrollToHash(url.hash);
